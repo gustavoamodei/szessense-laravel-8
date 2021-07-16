@@ -25,6 +25,11 @@ class CreateClienteTable extends Migration
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             
         });
+
+
+        Schema::table('cliente', function (Blueprint $table) {
+            $table->string('bairro');
+        });
     }
 
     /**

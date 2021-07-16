@@ -1,5 +1,5 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
     <head>
         <title>SZ Essence</title>
         <meta charset="UTF-8">
@@ -7,56 +7,11 @@
         
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
         @yield('css')
-      <style>  
+     
         
-    @media (max-width: 768px) { 
-      #test{
-        color: #00ff00;
-        position:absolute;
-        margin-left:200px;
-      }
-    }
-
-  
-    @media (min-width: 778px) { 
-      #test{
-        color: #00ff00;
-      }
-      #logado{
-        position:absolute;
-        margin-left:300px;
-      }
-      nav{
-             
-       }
-    }
-    @media (min-width: 992px) { 
-      #test{
-        color: #00ff00;
-        margin-left:600px;
-      }
-      #logado{
-        position:absolute;
-        margin-left:300px;
-      }
-      nav{
-            
-              
-       }
-    }
-    @media (min-width: 1200px) { 
-      #test{
-        color: #00ff00;
-      }
-      #logado{
-        position:absolute;
-        margin-left:800px;
-      }
-    }
-    </style> 
     </head>
     <body>
-        <div class="container-sm container-md container-lg container-xl">
+       
          
             <nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #42f5b9;">
             
@@ -101,37 +56,48 @@
                   <a style=" margin-left: 0px" href="">Logout</a>
                   <span> 
             </nav>
+
+            <div class="container-fluid">
             {{--conteudo dinamico das paginas--}}
                 @yield('content')
             {{--conteudo dinamico das paginas--}}
+            </div>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
            
             @yield('js')
-   <br><br>
-   <footer>
-     <p class="text-center">  @SZessence</p>
-   </footer>
+            
+           
+            <footer>
+              <p class="text-center">  @SZessence</p>
+            </footer>
+          
        </body>
+       <style>
+         
+       footer{
+        
+        background-color:  #3ffca4;
+        padding-bottom: 1px; 
+        display: block;
+        position: fixed;
+        padding-bottom: 8px;
+        bottom:0;
+        left:0;
+        width: 99.8%
+      }
+      footer p{
+        padding-top: 10px;
+      }
+
+      @media screen and (max-width: 768px){
+	
+        
+
+      }
+      </style>
  
-</div> <!-- container-->  
-   <style>
-
-
-         footer{
-             background-color: #42f5b9;
-             display: block;
-             position: fixed;
-             bottom:0;
-             left:0;
-             width: 100%;
-             height: 5%;
-             color: black;
-             
-         }
-     </style>
-
 </html>
 
   

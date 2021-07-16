@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrascoController;
 use App\Http\Controllers\AcessorioController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,6 @@ Route::get('/dashboard', function () {
 
 Route::resource('frasco', FrascoController::class);
 Route::resource('acessorio', AcessorioController::class);
+Route::resource('cliente', ClienteController::class);
 
 require __DIR__.'/auth.php';

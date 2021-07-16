@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Throwable;
 
 class ClienteController extends Controller
 {
@@ -24,18 +27,26 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('crear_cliente');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUpdateClienteRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateClienteRequest $request)
     {
-        //
+       try{ 
+            $cliente=$request->all();
+            Cliente::create($cliente);
+            $request->session()->flash('ok','Cliente  cadastrado com sucesso!');
+            return redirect()->route('cliente.index');
+       }catch(Throwable $e){
+            $request->session()->flash('erro','Erro Não foi possível cadastrar !');
+            return redirect()->route('cliente.index');
+       }
     }
 
     /**
@@ -63,11 +74,11 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreUpdateClienteRequest $request
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(StoreUpdateClienteRequest $request, Cliente $cliente)
     {
         //
     }
