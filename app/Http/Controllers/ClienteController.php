@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateClienteRequest;
 use App\Models\Cliente;
+use App\Models\Frasco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Throwable;
+
+use function PHPUnit\Framework\throwException;
 
 class ClienteController extends Controller
 {
@@ -17,7 +20,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes= Cliente::all();
+        return view('listar_cliente',['clientes'=>$clientes]);
     }
 
     /**
@@ -55,9 +59,10 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+        $cliente= Cliente::find($id);
+        return json_encode($cliente);
     }
 
     /**
@@ -66,9 +71,18 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        try{
+            if($cliente = Cliente::find($id)){
+                return view("edit_cliente",['cliente'=>$cliente]);
+            }else{
+                throw new Exception("cliente não existe!");
+            }
+        }catch(Throwable $e){
+            session()->flash('erro',"Não foi possivel recuperar o cliente ou ele não existe");    
+            return redirect()->route("cliente.index");
+        }
     }
 
     /**
@@ -78,9 +92,19 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateClienteRequest $request, Cliente $cliente)
+    public function update(StoreUpdateClienteRequest $request, $id)
     {
-        //
+        try{
+            if($cliente = Cliente::find($id)){
+                $data=$request->all();
+                $cliente->update($data);
+                return redirect()->route("cliente.index");
+            }
+        }catch(Throwable $e){
+            session()->flash('erro',"Não foi possivel atualizar o cliente !");
+            return redirect()->route("cliente.index");
+
+        }
     }
 
     /**
@@ -89,8 +113,8 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+        Cliente::where('id',$id)->delete();
     }
 }

@@ -23,7 +23,7 @@
         </div> 
         <div class="col-10 col-md-5 col-lg-3">
                 <div class="form-group">
-                    <label>Rua:</label>
+                    <label>Rua/Complemento:</label>
                     <input name="rua" type="text"  class="form-control" id="rua" value="{{$cliente->rua ?? old('rua')}}" >
                 </div>
                 <div class="form-group">

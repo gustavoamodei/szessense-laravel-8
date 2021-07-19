@@ -75,7 +75,10 @@
           
        </body>
        <style>
-         
+         table{
+           font-size: 16px;
+           font-weight: normal;
+         }
        footer{
         
         background-color:  #3ffca4;

@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('js')
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
 
 <!-- Adicionando Javascript -->
 <script>
 
  $(document).ready(function() {
-
+    $('#celular').mask('(00)00000-0000');
      function limpa_formulário_cep() {
          // Limpa valores do formulário de cep.
          $("#rua").val("");
@@ -72,9 +73,10 @@
 </script>
 @endsection
 @section('content')
-<h5 class="align-self-center d-flex justify-content-center mt-3"> Novo  Cliente  </h5>
+<h5 class="align-self-center d-flex justify-content-center mt-3"> Editar  Cliente  </h5>
 
-<form method="post"  action="{{route('cliente.update')}}">
+<form method="post"  action="{{route('cliente.update',$cliente->id)}}">
+    @method('PUT')
     @include('alerts.alert')
     @include('forms.form_cliente')
 </form>
