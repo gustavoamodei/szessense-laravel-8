@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<h5 class="align-self-center d-flex justify-content-center mt-3"> Novo  Óleo Base  </h5>
+<h5 class="align-self-center d-flex justify-content-center mt-3"> Novo  Óleo Essencial  </h5>
 
-<form method="post"  action="{{route('oleo_base.store')}}">
+<form method="post"  action="{{route('oleo_essencial.store')}}">
     @include('alerts.alert')
-    @include('forms.form_oleo_base')
+    @include('forms.form_oleo_essencial')
 </form>
 
 @endsection
@@ -15,7 +15,7 @@
     $(document).ready(function(){
      
       $('#valor_compra').mask('000.000.000.000.000,00', {reverse: true});
-      $('#preco_ml').mask('000.000.000.000.000,00', {reverse: true});
+    
     });
     </script>
 @endsection

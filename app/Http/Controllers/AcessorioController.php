@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Acessorio;
 use Illuminate\Http\Request;
+use Throwable;
+use Exception;
 
 class AcessorioController extends Controller
 {
@@ -14,7 +16,8 @@ class AcessorioController extends Controller
      */
     public function index()
     {
-        //
+        $acessorio= Acessorio::all(); 
+         return view('listar_acessorio',['acessorios'=>$acessorio]);
     }
 
     /**
@@ -24,7 +27,7 @@ class AcessorioController extends Controller
      */
     public function create()
     {
-        //
+        return view('crear_acessorio');
     }
 
     /**
@@ -35,7 +38,21 @@ class AcessorioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            //$data= $request->all();
+            $preco = str_replace( '.', '',$request->preco);
+            $p=str_replace( ',', '.',$preco);
+            $data= $request->except('preco');
+            $data['preco']=$p;
+            
+            Acessorio::create($data);
+            $request->session()->flash('ok', 'Acessório cadastrado com sucesso!');
+            return redirect()->route('acessorio.index');
+         }catch(Throwable $e){
+               // echo $e->getMessage();
+              $request->session()->flash('erro', 'Erro não foi possivel cadastrar tente novamente mais tarde!');
+              return redirect()->route('acessorio.index');
+         }
     }
 
     /**
@@ -55,9 +72,19 @@ class AcessorioController extends Controller
      * @param  \App\Models\Acessorio  $acessorio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Acessorio $acessorio)
+    public function edit($id)
     {
-        //
+        try{
+            if($acessorio  = Acessorio::find($id)){
+                return view('edit_acessorio',['acessorio' => $acessorio]);
+            }else{
+                throw new Exception('acessorio não existe');
+            }
+        }catch(Throwable $e){
+              // echo $e->getMessage();
+              session()->flash('erro', 'Erro não foi possível recuperar acessório não existe');
+              return redirect()->route('frasco.index');
+        }
     }
 
     /**
@@ -67,9 +94,24 @@ class AcessorioController extends Controller
      * @param  \App\Models\Acessorio  $acessorio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Acessorio $acessorio)
+    public function update(Request $request,$id)
     {
-        //
+        try{
+            if($acessorio  = Acessorio::find($id)){
+                $preco = str_replace( '.', '',$request->preco);
+                $p=str_replace( ',', '.',$preco);
+                $data= $request->except('preco');
+                $data['preco']=$p;
+
+                $acessorio->update($data);
+                return redirect()->route('acessorio.index');
+                
+            }
+        }catch(Throwable $e){
+            //echo $e->getMessage();
+            $request->session()->flash('erro', 'Erro não foi possivel cadastrar tente novamente mais tarde!');
+            return redirect()->route('acessorio.index');
+        }
     }
 
     /**
@@ -78,8 +120,8 @@ class AcessorioController extends Controller
      * @param  \App\Models\Acessorio  $acessorio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Acessorio $acessorio)
+    public function destroy($id)
     {
-        //
+        Acessorio::where('id',$id)->delete();
     }
 }

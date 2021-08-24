@@ -22,30 +22,34 @@
                 </div>
             @endif
                     
-        </div>
+    </div>
         
-        <a href="{{route('ob.create')}}" class="btn btn-success mb-3">Cadastrar</a>
-        <h5 class="align-self-center d-flex justify-content-center">Oleo Base<h5>
-        <table class=" table table table-bordered table-hover" id="table_ob">
+        <a href="{{route('oleo_essencial.create')}}" class="btn btn-success mb-3">Cadastrar</a>
+        <h5 class="align-self-center d-flex justify-content-center">Oleo Essencial<h5>
+        <table class=" table table table-bordered table-hover" id="table_oe">
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Descrição</th>
+                <th scope="col">valor de compra</th>
+                <th scope="col">Preço gota</th>
+                <th scope="col">Ml</th>
+                <th scope="col">Validade</th>
                 <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 
-                   @foreach ($obs as $ob)
+                   @foreach ($oes as $oe)
                    <tr>
-                        <td>{{$ob->id}}</td>
-                        <td>{{$ob->nome}}</td>
-                        <td>{{ number_format($ob->preco, 2 , ",", "."); }}</td>
-                        <td>{{ $ob->descricao }}</td>
+                        <td>{{$oe->id}}</td>
+                        <td>{{$oe->nome}}</td>
+                        <td>{{ number_format($oe->valor_compra, 2 , ",", "."); }}</td>
+                        <td>{{ number_format($oe->preco_gota, 2 , ",", "."); }}</td>
+                        <td>{{ $oe->ml }}</td>
+                        <td>{{ $oe->validade }}</td>
                         <td>
-                            <a href="{{route('ob.edit',$frasco->id )}}" class="btn btn-primary">Editar</a>
+                            <a href="{{route('oleo_essencial.edit',$oe->id )}}" class="btn btn-primary">Editar</a>
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDeletar">
                                 Excluir
                             </button>
@@ -71,7 +75,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Deseja Excluir Este registro de ID:<span id="id_ob"></span>?
+                Deseja Excluir Este registro de ID:<span id="id_oe"></span>?
                 <span id="token" style="display: none;">{{ csrf_token() }}</span>
             </div>
             <div class="modal-footer">
@@ -87,7 +91,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.25/sl-1.3.3/datatables.min.js"></script>
 <script>
     $(document).ready( function (){
-        $('#table_ob').DataTable(
+        $('#table_oe').DataTable(
                 {"bJQueryUI": true,
                     "oLanguage": {
                         "sProcessing":   "Processando...",
@@ -112,14 +116,14 @@
 
 
 
-        $(document).on("mouseenter click","#table_ob>tbody>tr",function(){
-        let dados = $('#table_ob').DataTable().row(this).data();
-        $("#id_ob").text(dados[0]);
+        $(document).on("mouseenter click","#table_oe>tbody>tr",function(){
+        let dados = $('#table_oe').DataTable().row(this).data();
+        $("#id_oe").text(dados[0]);
     });
 
 
     $("#deletar").click(function(){
-        var id=$("#id_ob").text();
+        var id=$("#id_oe").text();
         var _token =$("#token").text();
       
         $.ajax({

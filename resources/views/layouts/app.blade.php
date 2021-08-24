@@ -29,11 +29,11 @@
                         <span style ="color:black;">Cadastro/Simulação</span>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="">Cadastro de Óleos Essenciais</a>
-                        <a class="dropdown-item" href="">Cadastro de Óleos Base</a>
-                        <a class="dropdown-item" href="">Cadastro de Clientes</a>
-                        <a class="dropdown-item" href="">Cadastro Frascos</a>
-                      <a class="dropdown-item" href="">Cadastro Acessórios</a>
+                      <a class="dropdown-item" href="{{route('oleo_essencial.create')}}">Cadastro de Óleos Essenciais</a>
+                        <a class="dropdown-item" href="{{route('oleo_base.create')}}">Cadastro de Óleos Base</a>
+                        <a class="dropdown-item" href="{{route('cliente.create')}}">Cadastro de Clientes</a>
+                        <a class="dropdown-item" href="{{route('frasco.create')}}">Cadastro Frascos</a>
+                      <a class="dropdown-item" href="{{route('acessorio.create')}}">Cadastro Acessórios</a>
                         <a class="dropdown-item" href="">Simulação</a>
                         <a class="dropdown-item" href="">Deslogar</a>
                     </li>
@@ -42,11 +42,11 @@
                       <span style ="color:black;">Listar dados</span>
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="">Listar Óleos base</a>
-                      <a class="dropdown-item" href="">Listar Óleos Essenciais</a>
-                      <a class="dropdown-item" href="">Listar Clientes</a>
-                      <a class="dropdown-item" href="">Listar Frascos</a>
-                      <a class="dropdown-item" href="">Listar Acessórios</a>
+                      <a class="dropdown-item" href="{{route('oleo_base.index')}}">Listar Óleos base</a>
+                      <a class="dropdown-item" href="{{route('oleo_essencial.index')}}">Listar Óleos Essenciais</a>
+                      <a class="dropdown-item" href="{{route('cliente.index')}}">Listar Clientes</a>
+                      <a class="dropdown-item" href="{{route('frasco.index')}}">Listar Frascos</a>
+                      <a class="dropdown-item" href="{{route('acessorio.index')}}">Listar Acessórios</a>
                       <a class="dropdown-item" href="">Listar Orçamentos</a>
                       <a class="dropdown-item" href="">Antiga Tabela De Óleos</a>
                       <a class="dropdown-item" href="">Antiga Tabela De Frasco/Acesórios</a>
@@ -68,37 +68,12 @@
            
             @yield('js')
             
-           
-            <footer>
-              <p class="text-center">  @SZessence</p>
-            </footer>
-          
        </body>
        <style>
          table{
            font-size: 16px;
            font-weight: normal;
-         }
-       footer{
-        
-        background-color:  #3ffca4;
-        padding-bottom: 1px; 
-        display: block;
-        position: fixed;
-        padding-bottom: 8px;
-        bottom:0;
-        left:0;
-        width: 99.8%
-      }
-      footer p{
-        padding-top: 10px;
-      }
-
-      @media screen and (max-width: 768px){
-	
-        
-
-      }
+         }     
       </style>
  
 </html>

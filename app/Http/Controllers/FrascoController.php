@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateFrascoRequest;
 use App\Models\Frasco;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\TryCatch;
 use Throwable;
 
 class FrascoController extends Controller
@@ -84,7 +84,7 @@ class FrascoController extends Controller
             if($frasco  = Frasco::find($id)){
                 return view('edit_frasco',['frasco' => $frasco]);
             }else{
-                throw new Exception("produto não existe");
+                throw new Exception('produto não existe');
             }
         }catch(Throwable $e){
               // echo $e->getMessage();
